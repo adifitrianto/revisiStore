@@ -26,10 +26,11 @@
                 </div>
                 <div class="list-group list-group-flush">
                     <a href="{{ route('admin-dashboard') }}" class="list-group-item list-group-item-action">Dashboard</a>
-                    <a href="" class="list-group-item list-group-item-action">Products</a>
+                    <a href="{{ route('product.index') }}" class="list-group-item list-group-item-action {{ (request()->is('admin/product')) ? 'active' : '' }}">Products</a>
+                    <a href="{{ route('product-gallery.index') }}" class="list-group-item list-group-item-action {{ (request()->is('admin/product-gallery*')) ? 'active' : '' }}">Gallery</a>
                     <a href="{{ route('category.index') }}" class="list-group-item list-group-item-action {{ (request()->is('admin/category*')) ? 'active' : '' }}">Categories</a>
                     <a href="#" class="list-group-item list-group-item-action">Transactions</a>
-                    <a href="#" class="list-group-item list-group-item-action">Users</a>
+                    <a href="{{ route('user.index') }}" class="list-group-item list-group-item-action {{ (request()->is('admin/user*')) ? 'active' : '' }}">Users</a>
                     <a href="#" class="list-group-item list-group-item-action">Sign Out</a>
                     
                 </div>
@@ -54,9 +55,9 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
-                                    <img src="/images/icon-user.png" alt=""
+                                    <img src="#" alt="" style="background-color: #fff;"
                                         class="rounded-circle mr-2 profile-picture" />
-                                    Hi, Angga
+                                    Hi, Irfan
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/">Logout</a>
@@ -67,7 +68,7 @@
                         <ul class="navbar-nav d-block d-lg-none mt-3">
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
-                                    Hi, Angga
+                                    Hi, Irfan
                                 </a>
                             </li>
                             <li class="nav-item">

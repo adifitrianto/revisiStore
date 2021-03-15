@@ -15,8 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/categories', 'CategoryController@index')->name('categories');
+Route::get('/categories/{id}', 'CategoryController@detail')->name('categories-detail');
 Route::get('/details/{id}', 'DetailController@index')->name('detail');
+Route::post('/details/{id}', 'DetailController@add')->name('detail-add');
 Route::get('/cart', 'CartController@index')->name('cart');
+Route::delete('/cart/{id}', 'CartController@delete')->name('cart-delete');
+
+Route::post('/checkout', 'CheckoutController@process')->name('checkout');
+Route::post('/checkout/callback', 'CheckoutController@callback')->name('midtrans-callback');
+
 Route::get('/success', 'CartController@success')->name('success');          //transaksi berhasil
 
 Route::get('/register/success', 'Auth\RegisterController@success')->name('register-success');           //registrasi berhasil
@@ -38,6 +45,9 @@ Route::prefix('admin')
     ->group(function () {
         Route::get('/', 'DashboardController@index')->name('admin-dashboard');
         Route::resource('category', 'CategoryController');
+        Route::resource('user', 'UserController');
+        Route::resource('product', 'ProductController');
+        Route::resource('product-gallery', 'ProductGalleryController');
     });
 
 Auth::routes();
