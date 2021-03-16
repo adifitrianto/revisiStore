@@ -13,6 +13,7 @@ class TransactionDetail extends Model
      */
     protected $fillable = [
         'transaction_id',
+        'transactions_id',
         'products_id',
         'price',
         'resi',
@@ -26,4 +27,14 @@ class TransactionDetail extends Model
      * @var array
      */
     protected $hidden = [];
+
+    public function product()
+    {
+        return $this->hasOne(Product::class, 'id', 'products_id');
+    }
+
+    public function Transaction()
+    {
+        return $this->hasOne(Transaction::class, 'id', 'transactions_id');
+    }
 }

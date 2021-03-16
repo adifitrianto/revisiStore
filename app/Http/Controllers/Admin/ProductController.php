@@ -113,7 +113,7 @@ class ProductController extends Controller
 
         return view('pages.admin.product.edit', [
             'item' => $item,
-            'users' => $users,
+            // 'users' => $users,
             'categories' => $categories
         ]);
     }

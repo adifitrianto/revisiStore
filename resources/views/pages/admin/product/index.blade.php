@@ -27,7 +27,7 @@
                         <tr>
                           <th>ID</th>
                           <th>Nama</th>
-                          <th>Pemilik</th>
+                          <th>Admin</th>
                           <th>Kategori</th>
                           <th>Harga</th>
                           <th>Aksi</th>

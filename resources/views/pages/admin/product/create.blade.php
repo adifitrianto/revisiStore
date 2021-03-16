@@ -38,7 +38,7 @@
                             </div>
                             <div class="col-md-12">
                               <div class="form-group">
-                                <label>Pemilik Product</label>
+                                <label>Admin</label>
                                 <select name="users_id" class="form-control">
                                   @foreach ($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>                                      

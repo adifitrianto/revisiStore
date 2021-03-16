@@ -52,8 +52,7 @@ class CheckoutController extends Controller
         }
 
         //delete cart
-        Cart::with(['product', 'iser'])
-            ->where('users_id', Auth::user()->id)
+        Cart::where('users_id', Auth::user()->id)
             ->delete();
 
         // midtrans config
