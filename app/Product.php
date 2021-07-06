@@ -10,10 +10,12 @@ class Product extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name', 'users_id', 'categories_id', 'price', 'description', 'slug'
+        'name', 'users_id', 'categories_id', 'price', 'description', 'slug', 'stock_total', 'stock_available'
     ];
 
     protected $hidden = [];
+
+    protected $appends = ['quantity'];
 
     public function galleries()
     {
@@ -28,5 +30,10 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'categories_id', 'id');
+    }
+    
+    function getQuantityAttribute() 
+    {
+    return sprintf('%s / %s', $this->stock_available, $this->stock_total);
     }
 }

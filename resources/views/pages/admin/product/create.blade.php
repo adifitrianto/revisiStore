@@ -68,6 +68,18 @@
                                 <textarea name="description" id="editor"></textarea>
                               </div>
                             </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Stock Availabe</label>
+                                <input type="number" id="stock_available" class="form-control" name="stock_available" min="1" required="">
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Stock Total</label>
+                                <input type="number" id="stock_total" class="form-control" name="stock_total" min="1" required="">
+                              </div>
+                            </div>
                           </div>
                           <div class="row">
                             <div class="col text-right">

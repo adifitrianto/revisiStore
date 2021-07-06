@@ -42,7 +42,7 @@
                                 @foreach ($carts as $cart)
                                 <tr>
                                     <td style="width: 25%;">
-                                        @if ($cart->product->galleries)
+                                        @if ($cart->product['galleries'])
                                             <img src="{{ Storage::url($cart->product->galleries->first()->photos) }}" 
                                             alt="" 
                                             class="cart-image" />
@@ -51,12 +51,12 @@
                                         @endif
                                     </td>
                                     <td style="width: 35%;">
-                                        <div class="product-title">{{ $cart->product->name }}</div>
-                                        <div class="product-subtitle">by {{ $cart->product->user->sore_name }}</div>
+                                        <div class="product-title">{{ $cart->product['name'] }}</div>
+                                        {{-- <div class="product-subtitle">by {{ $cart->product->user->sore_name }}</div> --}}
                                     </td>
                                     <td style="width: 35%;">
-                                        <div class="product-title">${{ number_format($cart->product->price) }}</div>
-                                        <div class="product-subtitle">USD</div>
+                                        <div class="product-title">Rp. {{ number_format($cart->product['price']) }}</div>
+                                       
                                     </td>
                                     <td style="width: 20%;">
                                         <form action="{{ route('cart-delete', $cart->id) }}" method="POST">
@@ -69,7 +69,7 @@
                                     </td>
                                 </tr>
                                 @php
-                                    $totalPrice += $cart->product->price
+                                    $totalPrice += $cart->product['price']
                                 @endphp
                                 @endforeach
                             </tbody>
@@ -91,15 +91,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="address_one">Address 1</label>
-                                <input type="text" class="form-control" id="address_one" aria-describedby="emailHelp" name="address_one"
-                                    value="Setra Duta Cemara" />
+                                <input type="text" class="form-control" id="address_one" aria-describedby="emailHelp" name="address_one"/>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="address_two">Address 2</label>
-                                <input type="text" class="form-control" id="addressTwo" aria-describedby="emailHelp" name="addressTwo"
-                                    value="Blok B2 No. 34" />
+                                <input type="text" class="form-control" id="addressTwo" aria-describedby="emailHelp" name="addressTwo"/>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -123,7 +121,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="zip_code">Postal Code</label>
-                                <input type="text" class="form-control" id="zip_code" name="zip_code" value="40512" />
+                                <input type="text" class="form-control" id="zip_code" name="zip_code" value="40416" />
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -135,7 +133,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="phone_number">Mobile</label>
-                                <input type="text" class="form-control" id="phone_number" name="phone_number" value="+628 2020 11111" />
+                                <input type="text" class="form-control" id="phone_number" name="phone_number" value="+628 1111 0090" />
                             </div>
                         </div>
                     </div>
@@ -149,19 +147,19 @@
                     </div>
                     <div class="row" data-aos="fade-up" data-aos-delay="200">
                         <div class="col-4 col-md-2">
-                            <div class="product-title">$0</div>
+                            <div class="product-title">Rp. 0</div>
                             <div class="product-subtitle">Country Tax</div>
                         </div>
                         <div class="col-4 col-md-3">
-                            <div class="product-title">$0</div>
+                            <div class="product-title">Rp. 0</div>
                             <div class="product-subtitle">Product Insurance</div>
                         </div>
                         <div class="col-4 col-md-2">
-                            <div class="product-title">$0</div>
+                            <div class="product-title">Rp. 0</div>
                             <div class="product-subtitle">Ship to Jakarta</div>
                         </div>
                         <div class="col-4 col-md-2">
-                            <div class="product-title text-success">${{ number_format($totalPrice ?? 0) }}</div>
+                            <div class="product-title text-success">Rp. {{ number_format($totalPrice ?? 0) }}</div>
                             <div class="product-subtitle">Total</div>
                         </div>
                         <div class="col-8 col-md-3">

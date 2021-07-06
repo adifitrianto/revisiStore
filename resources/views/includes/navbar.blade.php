@@ -1,21 +1,18 @@
-  <nav class="navbar navbar-expand-lg navbar-light navbar-store fixed-top navbar-fixed-top" data-aos="fade-down">
+<nav class="navbar navbar-expand-lg navbar-light navbar-store fixed-top navbar-fixed-top" data-aos="fade-down">
     <div class="container">
       <a href="{{ route('home') }}" class="navbar-brand">
-        <img src="/images/logo.svg" alt="">
+        <img src="/images/logos.png" alt="" style="height: 50px;">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
+          <li class="nav-item">
               <a href="{{ route('home') }}" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
               <a href="{{ route('categories') }}" class="nav-link">Categories</a>
-          </li>
-          <li class="nav-item">
-              <a href="#" class="nav-link">Reward</a>
           </li>
           @guest
           <li class="nav-item">
@@ -46,7 +43,7 @@
                         Hi, {{ Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu">
-                        <a href="{{ route('dashboard') }}" class="dropdown-item">Dashboard</a>
+                        <a href="{{ route('dashboard-transaction') }}" class="dropdown-item">Transaction</a>
                         <a href="{{ route('dashboard-settings-account') }}" class="dropdown-item">
                             Settings
                         </a>
@@ -77,7 +74,7 @@
 
             <ul class="navbar-nav d-block d-lg-none">
                 <li class="nav-item">
-                    <a href="{{ route('dashboard') }}" class="nav-link">
+                    <a href="#" class="nav-link">
                         Hi, {{ Auth::user()->name }}
                     </a>
                 </li>

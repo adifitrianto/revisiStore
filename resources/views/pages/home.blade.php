@@ -18,13 +18,13 @@
                         </ol>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                            <img src="/images/banner.jpg" class="d-block w-100" alt="Carousel Image" />
+                            <img src="/images/banner1.png" class="d-block w-100" alt="Carousel Image" />
                             </div>
                             <div class="carousel-item">
-                            <img src="/images/banner.jpg" class="d-block w-100" alt="Carousel Image" />
+                            <img src="/images/banner2.png" class="d-block w-100" alt="Carousel Image" />
                             </div>
                             <div class="carousel-item">
-                            <img src="/images/banner.jpg" class="d-block w-100" alt="Carousel Image" />
+                            <img src="/images/banner3.png" class="d-block w-100" alt="Carousel Image" />
                             </div>
                         </div>
                         </div>
@@ -89,7 +89,7 @@
                                 {{ $product->name }}
                             </div>
                             <div class="products-price">
-                                ${{ $product->price }}
+                                Rp. {{ $product->price }}
                             </div>
                         </a>
                     </div>

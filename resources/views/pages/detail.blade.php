@@ -44,6 +44,7 @@
                     </div>
                 </div>
             </div>
+
         </section>
         <div class="store-details-container" data-aos="fade-up">
             <section class="store-heading">
@@ -52,13 +53,20 @@
                         <div class="col-lg-8">
                             <h1>{{ $product->name }}</h1>
                             <div class="owner">By {{ $product->user->store_name }}</div>
-                            <div class="price">${{ number_format($product->price) }}</div>
+                            <div class="price">Rp. {{ number_format($product->price) }}</div>
+                            @if ($product->stock_available>0)
+                            <span class="badge badge-success nav-link py-2 px-4 text-white  mb-3" ><i class="fas fa-check"></i> Stok Tersedia</span>
+                            @else
+                            <span class="badge badge-danger nav-link py-2 px-4 text-white  mb-3"><i class="fas fa-times"></i> Stok Habis</span>
+                            @endif 
+
                         </div>
+                         
                         <div class="col-lg-2" data-aos="zoom-in">
                             @auth
                                 <form action="{{ route('detail-add', $product->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                    <button type="submit" class="btn btn-success nav-link px-4 text-white btn-block mb-3" href="/cart.html">
+                                    <button type="submit" class="btn btn-success nav-link px-4 text-white btn-block mb-3" href="/cart.html" @if($product->stock_available<=0) disabled @endif>
                                     Add to Cart
                                 </button>
                                 </form>
@@ -82,7 +90,7 @@
                 </div>
             </section>
             <section class="store-review">
-                <div class="container">
+                {{-- <div class="container">
                     <div class="row">
                         <div class="col-12 col-lg-8 mt-3 mb-3">
                             <h5>Customer Review (3)</h5>
@@ -121,7 +129,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </section>
         </div>
     </div>

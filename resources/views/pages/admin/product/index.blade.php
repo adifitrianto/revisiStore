@@ -25,11 +25,13 @@
                     <table class="table table-hover scroll-horizontal-vertical w-100" id="crudTable">
                       <thead>
                         <tr>
-                          <th>ID</th>
+                          <th>No</th>
                           <th>Nama</th>
                           <th>Admin</th>
                           <th>Kategori</th>
                           <th>Harga</th>
+                          <th>Stock Available</th>
+                          <th>Stock Total</th>
                           <th>Aksi</th>
                         </tr>
                       </thead>
@@ -55,18 +57,25 @@
             url: '{!! url()->current() !!}',
         },
         columns: [
-            { data:'id', name:'id' },
+            { "data" :null, "sortable": false,
+                  render : function (data, type, row, meta) 
+                  {
+                      return meta.row + meta.settings._iDisplayStart + 1
+                  } },
             { data:'name', name:'name' },
             { data:'user.name', name:'user.name' },
             { data:'category.name', name:'category.name' },
             { data:'price', name:'price' },
+            { data:'stock_available', name:'stock_available' },
+             { data:'stock_total', name:'stock_total' },
             { 
                 data:'action', 
                 name:'action',
                 orderable: false,
                 searchable: false,
-                width: '15%' 
+                width: '15%'
             },
+
         ]
     })
 </script>

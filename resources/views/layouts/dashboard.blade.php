@@ -24,11 +24,7 @@
                     <img src="/images/dashboard-store-logo.svg" alt="" class="my-4" />
                 </div>
                 <div class="list-group list-group-flush">
-                    <a href="/dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
-                    <a href="/dashboard-products.html" class="list-group-item list-group-item-action">My Products</a>
-                    <a href="/dashboard-transactions.html"
-                        class="list-group-item list-group-item-action">Transactions</a>
-                    <a href="/dashboard-settings.html" class="list-group-item list-group-item-action">Store Settings</a>
+                    
                     <a href="/dashboard-account.html" class="list-group-item list-group-item-action">My Account</a>
                 </div>
             </div>
@@ -54,26 +50,21 @@
                                     aria-haspopup="true" aria-expanded="false">
                                     <img src="/images/icon-user.png" alt=""
                                         class="rounded-circle mr-2 profile-picture" />
-                                    Hi, Angga
+                                    Hi, 
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/index.html">Back to Store</a>
-                                    <a class="dropdown-item" href="/dashboard-account.html">Settings</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="/">Logout</a>
+                                   
+                                    
+                                    <a class="dropdown-item" href="/">Back</a>
                                 </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-inline-block mt-2" href="#">
-                                    <img src="/images/icon-cart-empty.svg" alt="" />
-                                </a>
-                            </li>
+                         
                         </ul>
                         <!-- Mobile Menu -->
                         <ul class="navbar-nav d-block d-lg-none mt-3">
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
-                                    Hi, Angga
+                                    Hi, 
                                 </a>
                             </li>
                             <li class="nav-item">

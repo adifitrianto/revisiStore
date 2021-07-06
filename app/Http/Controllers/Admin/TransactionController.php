@@ -20,14 +20,18 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = TransactionDetail::with(['transaction.user', 'product.galleries'])
-            ->whereHas('product', function ($product) {
-                $product->where('users_id', Auth::user()->id);
-            });
+        // $transactions = TransactionDetail::with(['transaction.user', 'product.galleries'])
+        //     ->whereHas('product', function ($product) {
+        //         $product->where('users_id', Auth::user()->id);
+        //     });
 
-        return view('pages.admin.transaction.index', [
-            'transaction_data' => $transactions->get(),
-        ]);
+        // return view('pages.admin.transaction.index', [
+        //     'transaction_data' => $transactions->get(),
+        // ]);
+
+
+        $transactions = Transaction::all();
+        return view('pages.admin.transaction.index', compact('transactions'));
     }
 
     /**
@@ -70,15 +74,12 @@ class TransactionController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        $item = Transaction::with(['user'])->findOrFail($id);
-        $transaction = TransactionDetail::with(['transaction.user', 'product.galleries'])
-            ->findOrFail($id);
+        $transaction = Transaction::findOrFail($id);
+        // dd($item, $transaction);
 
-        // return view('pages.admin.transaction.detail', [
-        //     'item' => $item,
-        //     'transaction' => $transaction
-        // ]);
-        return dd($transaction);
+        return view('pages.admin.transaction.detail', compact('transaction'));
+
+        // return dd($item, $transaction);
     }
 
     /**
@@ -90,13 +91,14 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
 
-        $item = TransactionDetail::findOrFail($id);
+        $data = $request->all();
+        $item = Transaction::findOrFail($id);
 
         $item->update($data);
 
-        return redirect()->route('transaction.details');
+        $transactions = Transaction::all();
+        return view('pages.admin.transaction.index', compact('transactions'));
     }
 
     /**

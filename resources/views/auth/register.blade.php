@@ -62,21 +62,21 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="form-group">
+                            <div class="form-group d-none">
                                 <label>Store</label>
                                 <p class="text-muted">
                                     Apakah anda juga ingin membuka toko?
                                 </p>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input class="custom-control-input" type="radio" name="is_store_open"
-                                        id="openStoreTrue" v-model="is_store_open" :value="true" />
-                                    <label class="custom-control-label" for="openStoreTrue">Iya, boleh</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input class="custom-control-input" type="radio" name="is_store_open"
                                         id="openStoreFalse" v-model="is_store_open" :value="false" />
                                     <label makasih class="custom-control-label" for="openStoreFalse">Enggak,
                                         makasih</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input class="custom-control-input" type="radio" name="is_store_open"
+                                        id="openStoreTrue" v-model="is_store_open" :value="true" />
+                                    <label class="custom-control-label" for="openStoreTrue">Iya, boleh</label>
                                 </div>
                             </div>
                             <div class="form-group" v-if="is_store_open">
@@ -120,7 +120,6 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         Vue.use(Toasted);
-
         var register = new Vue({
             el: "#register",
             mounted() {
@@ -146,7 +145,6 @@
                                 }
                             );
                             self.email_unavailable = false;
-
                         } else {
                             self.$toasted.error(
                                 "Maaf, tampaknya email sudah terdaftar pada sistem kami.",
@@ -164,9 +162,9 @@
             },
             data() {
                 return {
-                name: "Angga Hazza Sett",
-                email: "kamujagoan@bwa.id",
-                is_store_open: true,
+                name: " ",
+                email: " ",
+                is_store_open: false,
                 store_name: "",
                 email_unavailable: false
                 }

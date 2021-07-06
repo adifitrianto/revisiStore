@@ -22,24 +22,11 @@
           <div class="card">
             <div class="card-body">
               <div class="row">
-                <div class="col-12 col-md-4">
-                  <img
-                    src="{{ Storage::url($transaction->product->galleries->first()->photos ?? '') }}"
-                    class="w-100 mb-3"
-                    alt=""
-                  />
-                </div>
                 <div class="col-12 col-md-8">
                   <div class="row">
                     <div class="col-12 col-md-6">
                       <div class="product-title">Customer Name</div>
-                      {{-- <div class="product-subtitle">{{ $transaction->transaction->user->name }}</div> --}}
-                    </div>
-                    <div class="col-12 col-md-6">
-                      <div class="product-title">Product Name</div>
-                      <div class="product-subtitle">
-                        {{ $transaction->product->name }}
-                      </div>
+                      <div class="product-subtitle">{{ $transaction->user->name }}</div>
                     </div>
                     <div class="col-12 col-md-6">
                       <div class="product-title">
@@ -50,33 +37,49 @@
                       </div>
                     </div>
                     <div class="col-12 col-md-6">
-                      <div class="product-title">Payment Status</div>
+                      <div class="product-title">Transaction Status</div>
                       <div class="product-subtitle text-danger">
-                        {{-- {{ $transaction->transaction->transaction_status }} --}}
+                        {{ $transaction->transaction_status }}
                       </div>
                     </div>
                     <div class="col-12 col-md-6">
-                      <div class="product-title">
-                        Total Amount
-                      </div>
+                      <div class="product-title"> Total Price </div>
                       <div class="product-subtitle">
-                        {{-- ${{ number_format($transaction->transaction->total_price) }} --}}
+                        Rp.{{ number_format($transaction->total_price) }}
                       </div>
                     </div>
                     <div class="col-12 col-md-6">
-                      <div class="product-title">
-                        Mobile
-                      </div>
+                      <div class="product-title">Mobile</div>
                       <div class="product-subtitle">
-                        {{-- {{ $transaction->transaction->user->phone_number }} --}}
+                        {{ $transaction->user->phone_number }}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <form action="{{ route('transaction.edit', $transaction->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
+                            
+                @foreach ($transaction->details as $detail)
                 <div class="row">
+                  
+                    <div class="col-12 col-md-4">
+                      <img
+                        src="{{ Storage::url($detail->product['galleries']->first()->photos ?? '') }}"
+                        class="w-100 mb-3"
+                        alt=""
+                      />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <div class="product-title">Product Name</div>
+                      <div class="product-subtitle">
+                        {{ $detail->product['name'] }}
+                      </div>
+                    </div>
+                </div>
+                @endforeach
+
+              <form action="{{ route('transaction.update', $transaction->id) }}" method="POST">
+                @csrf
+                <input name="_method" type="hidden" value="PUT">
                   <div class="col-12 mt-4">
                     <h5>Shipping Information</h5>
                   </div>
@@ -85,42 +88,42 @@
                       <div class="col-12 col-md-6">
                         <div class="product-title">Address I</div>
                         <div class="product-subtitle">
-                          {{-- {{ $transaction->transaction->user->address_one }} --}}
+                          {{ $transaction->user['address_one'] }}
                         </div>
                       </div>
                       <div class="col-12 col-md-6">
                         <div class="product-title">Address II</div>
                         <div class="product-subtitle">
-                          {{-- {{ $transaction->transaction->user->address_two }} --}}
+                          {{ $transaction->user['address_two'] ?? "N/A"}}
                         </div>
                       </div>
                       <div class="col-12 col-md-6">
                         <div class="product-title">Province</div>
                         <div class="product-subtitle">
-                          {{-- {{ App\Models\Province::find($transaction->transaction->user->provinces_id)->name }} --}}
+                          {{ App\Models\Province::find($transaction->user->provinces_id)->name }}
                         </div>
                       </div>
                       <div class="col-12 col-md-6">
                         <div class="product-title">City</div>
                         <div class="product-subtitle">
-                          {{-- {{ App\Models\Regency::find($transaction->transaction->user->regencies_id)->name }} --}}
+                          {{ App\Models\Regency::find($transaction->user->regencies_id)->name }}
                         </div>
                       </div>
                       <div class="col-12 col-md-6">
                         <div class="product-title">Postal Code</div>
-                        {{-- <div class="product-subtitle">{{ $transaction->transaction->user->zip_code }}</div> --}}
+                        <div class="product-subtitle">{{ $transaction->user['zip_code'] }}</div>
                       </div>
                       <div class="col-12 col-md-6">
                         <div class="product-title">Country</div>
-                        {{-- <div class="product-subtitle">{{ $transaction->transaction->user->country }}</div> --}}
+                        <div class="product-subtitle">{{ $transaction->user['country'] }}</div>
                       </div>
                       <div class="col-12 col-md-3">
-                        <div class="product-title">Shipping Status</div>
+                        <div class="product-title">Transaction Status</div>
                         <select
-                          name="shipping_status"
+                          name="transaction_status"
                           id="status"
                           class="form-control"
-                          v-model="status"
+                          {{-- v-model="status" --}}
                         >
                           <option value="PENDING">Pending</option>
                           <option value="SHIPPING">Shipping</option>
@@ -148,7 +151,7 @@
                       </template>
                     </div>
                   </div>
-                </div>
+                  
                 <div class="row mt-4">
                   <div class="col-12 text-right">
                     <button
@@ -160,6 +163,7 @@
                   </div>
                 </div>
               </form>
+
             </div>
           </div>
         </div>
@@ -169,7 +173,7 @@
 </div>
 @endsection
 
-@push('addon-script')
+{{-- @push('addon-script')
     <script src="/vendor/vue/vue.js"></script>
     <script>
         var transactionDetails = new Vue({
@@ -180,4 +184,4 @@
         },
         });
     </script>
-@endpush
+@endpush --}}

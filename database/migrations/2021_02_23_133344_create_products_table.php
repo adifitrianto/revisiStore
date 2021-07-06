@@ -20,7 +20,8 @@ class CreateProductsTable extends Migration
             $table->integer('categories_id');
             $table->integer('price');
             $table->text('description');
-
+            $table->integer('stock_available');
+            $table->integer('stock_total');
             $table->softDeletes();
             $table->timestamps();
         });

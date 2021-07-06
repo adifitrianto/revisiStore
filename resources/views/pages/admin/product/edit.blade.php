@@ -38,15 +38,12 @@
                               </div>
                             </div>
                             <div class="col-md-12">
-                              {{-- <div class="form-group">
+                            <div class="form-group">
                                 <label>Pemilik Product</label>
                                 <select name="users_id" class="form-control">
-                                  <option value="{{ $item->users_id }}" selected>{{ $item->user->name }}</option>
-                                  @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>                                      
-                                  @endforeach
+                                  <option value="{{ $item->users_id }}" selected>{{ $item->user['name'] }}</option>
                                 </select>
-                              </div> --}}
+                              </div> 
                             </div>
                             <div class="col-md-12">
                               <div class="form-group">
@@ -63,6 +60,18 @@
                               <div class="form-group">
                                 <label>Harga Product</label>
                                 <input type="number" name="price" class="form-control" value="{{ $item->price }}" required>
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Stock Availabe</label>
+                                <input type="number" id="stock_available" class="form-control" name="stock_available" min="1" value="{{ $item->stock_available }}" required="">
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Stock Total</label>
+                                <input type="number" id="stock_total" class="form-control" name="stock_total" min="1" required="" value="{{ $item->stock_total }}">
                               </div>
                             </div>
                             <div class="col-md-12">

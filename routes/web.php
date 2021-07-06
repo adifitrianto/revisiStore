@@ -1,5 +1,7 @@
 <?php
 
+use App\Product;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,6 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/dashboard/settings', 'DashboardSettingController@store')->name('dashboard-settings-store');
     Route::get('/dashboard/account', 'DashboardSettingController@account')->name('dashboard-settings-account');
+    Route::post('/dashboard/account/{redirect}', 'DashboardSettingController@update')->name('dashboard-settings-redirect');
 });
 
 //
@@ -58,6 +61,17 @@ Route::prefix('admin')
         Route::resource('product', 'ProductController');
         Route::resource('product-gallery', 'ProductGalleryController');
         Route::resource('transaction', 'TransactionController');
+        Route::resource('confirmed', 'ConfirmedController');
+        Route::get('warehouse/print', 'WarehouseController@print')->name('print');
+        Route::get('warehouse/warehouseExport', 'WarehouseController@warehouseExport')->name('warehouseExport');
+        Route::get('warehouse/filter', 'WarehouseController@filter')->name('filter');
+        Route::resource('warehouse', 'WarehouseController');
+           Route::any('/warehouse/data/{jenis}', 'WarehouseController@data');
     });
 
 Auth::routes();
+
+Route::get('datatable', function () {
+  return view('datatable', ['produk' => Product::where('stock_available', "!=", 0)->get()]);
+});
+
