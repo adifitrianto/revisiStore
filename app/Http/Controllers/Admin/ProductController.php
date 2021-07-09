@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use App\Http\Requests\Admin\ProductRequest;
 use App\User;
 use App\Category;
+use App\ProductGallery;
 use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
@@ -22,10 +23,16 @@ class ProductController extends Controller
      */
     public function index()
     {
+        // $query = Product::with(['user', 'category']);
+        // dd($query->latest('created_at')->first()->image);
+
         if (request()->ajax()) {
-            $query = Product::with(['user', 'category']);
+            $query = Product::with(['user', 'category', 'galleries']);
 
             return Datatables::of($query)
+                ->addColumn('image', function ($item) {
+                    return $item->image ? '<img src="' . Storage::url($item->image) . '" style="max-height: 80px;" />' : '';
+                })
                 ->addColumn('action', function ($item) {
                     return '
                         <div class="btn-group">
@@ -38,6 +45,9 @@ class ProductController extends Controller
                                     <a class="dropdown-item" href="' . route('product.edit', $item->id) . '">
                                         Sunting
                                     </a>
+                                    <a class="dropdown-item" href="' . route('product.gallery', $item->id) . '">
+                                        Gallery
+                                    </a>
                                     <form action="' . route('product.destroy', $item->id) . '" method="POST">
                                         ' . method_field('delete') . csrf_field() . '
                                         <button type="submit" class="dropdown-item text-danger">
@@ -49,7 +59,7 @@ class ProductController extends Controller
                         </div>
                     ';
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['image', 'action'])
                 ->make();
         }
 
@@ -150,5 +160,50 @@ class ProductController extends Controller
         $item->delete();
 
         return redirect()->route('product.index');
+    }
+
+    public function gallery($id)
+    {
+        if (request()->ajax()) {
+            $query = ProductGallery::with(['product'])->where('products_id', $id);
+
+            return Datatables::of($query)
+                ->addColumn('action', function ($item) {
+                    return '
+                        <div class="btn-group">
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle mr-1 mb-1"
+                                        type="button" data-toggle="dropdown">
+                                        Aksi
+                                </button>
+                                <div class="dropdown-menu">
+                                    <form action="' . route('product-gallery.destroy', $item->id) . '" method="POST">
+                                        ' . method_field('delete') . csrf_field() . '
+                                        <button type="submit" class="dropdown-item text-danger">
+                                            hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    ';
+                })
+                ->editColumn('photos', function ($item) {
+                    return $item->photos ? '<img src="' . Storage::url($item->photos) . '" style="max-height: 80px;" />' : '';
+                })
+                ->rawColumns(['action', 'photos'])
+                ->make();
+        }
+
+        return view('pages.admin.product.gallery')->with('productId', $id);
+    }
+
+    public function galleryCreate($id)
+    {
+        $products = Product::where('id', $id)->get();
+
+        return view('pages.admin.product-gallery.create', [
+            'products' => $products
+        ]);
     }
 }
