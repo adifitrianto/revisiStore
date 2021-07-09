@@ -97,7 +97,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="address_two">Address 2</label>
-                                <input type="text" class="form-control" id="addressTwo" aria-describedby="emailHelp" name="addressTwo"/>
+                                <input type="text" class="form-control" id="address_two" aria-describedby="emailHelp" name="address_two"/>
                             </div>
                         </div>
                         <div class="col-md-4">
