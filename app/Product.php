@@ -15,7 +15,7 @@ class Product extends Model
 
     protected $hidden = [];
 
-    protected $appends = ['quantity'];
+    protected $appends = ['quantity', 'image'];
 
     public function galleries()
     {
@@ -31,9 +31,14 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class, 'categories_id', 'id');
     }
-    
-    function getQuantityAttribute() 
+
+    function getQuantityAttribute()
     {
-    return sprintf('%s / %s', $this->stock_available, $this->stock_total);
+        return sprintf('%s / %s', $this->stock_available, $this->stock_total);
+    }
+
+    function getImageAttribute()
+    {
+        return $this->galleries()->first()->photos;
     }
 }
