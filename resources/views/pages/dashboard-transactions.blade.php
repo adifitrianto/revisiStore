@@ -1,72 +1,58 @@
 @extends('layouts.app')
 
 @section('title')
-    Store Category Page
+    User Transactions
 @endsection
 
 @section('content')
-
     <div class="page-content page-home">
-      <section class="store-trend-categories">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-12" data-aos="fade-up">
-              <h5>Payment Confirm</h5>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section>
-         <div class="section-content section-dashboard-home" data-aos="fade-up">
+        <section class="store-trend-categories">
             <div class="container-fluid">
-              <div class="dashboard-heading">
-              </div>
-              <div class="dashboard-content">
                 <div class="row">
-                  <div class="col-md-12">
-                    @if($errors->any())
-                      <div class="alert alert-danger">
-                        <ul>
-                          @foreach ($errors->all() as $error)
-                              <li>{{ $error }}</li>
-                          @endforeach
-                        </ul>
-                      </div>
-                    @endif
-                    <div class="card">
-                      <div class="card-body">
-                        <form action="{{ route('confirmed.store') }}" method="POST" enctype="multipart/form-data">
-                          @csrf
-                          <div class="row">
-                            <div class="col-md-12">
-                              <div class="form-group">
-                                <label>Kode Transaksi</label>
-                                 <input type="text" name="name" class="form-control" required>
-                              </div>
-                            </div>
-                            <div class="col-md-12">
-                              <div class="form-group">
-                                <label>Bukti</label>
-                                <input type="file" name="photos" class="form-control" required>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col text-right">
-                              <button type="submit" class="btn btn-success px-5">
-                                Upload
-                              </button>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
+                    <div class="col-12" data-aos="fade-up">
+                        <h5 class="mb-3">Recent Transactions</h5>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
-      </section>
+        </section>
+
+        <section>
+            <div class="section-content section-dashboard-home" data-aos="fade-up">
+                <div class="container-fluid">
+                    <div class="dashboard-content">
+                        <div class="row mt-3">
+                            <div class="col-12 mt-2">
+                                @foreach ($transactions as $transaction)
+                                    <a class="card card-list d-block"
+                                        href="{{ route('dashboard-transaction-details', $transaction->id) }}">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-1">
+
+                                                </div>
+                                                <div class="col-md-3">
+                                                    {{ $transaction->code ?? '' }}
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    {{ $transaction->transaction_status ?? '' }}
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    {{ $transaction->created_at ?? '' }}
+                                                </div>
+                                                <div class="col-md-1 d-none d-md-block">
+                                                    <img src="/images/dashboard-arrow-right.svg" alt="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 @endsection
