@@ -23,8 +23,11 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Transaction Code</th>
+                                                <th>Transaction ID</th>
+                                                <th>User ID</th>
+                                                <th>Code</th>
                                                 <th>Foto</th>
+                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
@@ -57,8 +60,16 @@
                     }
                 },
                 {
-                    data: 'transaction.code',
-                    name: 'transaction.code'
+                    data: 'id',
+                    name: 'id'
+                },
+                {
+                    data: 'users_id',
+                    name: 'users_id'
+                },
+                {
+                    data: 'code',
+                    name: 'code'
                 },
                 {
                     data: 'photos',

@@ -3,34 +3,55 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ConfirmedController extends Controller
 {
     public function index()
     {
-    	if (request()->ajax()) {
-            $query = transaction();
+        if (request()->ajax()) {
+            $query = Transaction::where('transaction_status', 'CONFIRMED')->get();
 
-            return Datatables::of($query)
-                ->editColumn('photos', function ($item) {
-                    return $item->photos ? '<img src="' . Storage::url($item->photos) . '" style="max-height: 80px;" />' : '';
+            return datatables()::of($query)
+                ->addColumn('action', function ($item) {
+                    return '
+                        <a href=' . route('confirmed.edit', $item->id) . ' class="btn btn-primary text-white">
+                            Cek
+                        </a>
+                ';
                 })
-               
+                ->editColumn('photos', function ($item) {
+                    return $item->payment_image ? '<img src="' . Storage::url($item->payment_image) . '" style="max-height: 80px;" />' : '';
+                })
+                ->rawColumns(['action', 'photos'])
                 ->make();
         }
 
         return view('pages.admin.confirmed.index');
     }
 
-    public function store(Confirmed $request)
+    public function edit($id)
     {
-        $data = $request->all();
+        $transaction = Transaction::find($id);
+        $payment_image_path = Storage::url($transaction->payment_image);
 
-        $data['photos'] = $request->file('photos')->store('assets/product', 'public');
+        return view('pages.admin.confirmed.edit', compact(['transaction', 'payment_image_path']));
+    }
 
-        Confirmed::create($data);
+    public function update($id, Request $request)
+    {
+        $transaction = Transaction::find($id);
+        if ($request->action == 'valid') {
+            $transaction->transaction_status = 'PAID';
+        } else if ($_POST['action'] == 'Delete') {
+            $transaction->transaction_status = 'PENDING';
+        } else {
+            abort(500);
+        }
+        $transaction->save();
 
-        return redirect()->route('dashboard-transactions');
+        return view('pages.admin.confirmed.index');
     }
 }
