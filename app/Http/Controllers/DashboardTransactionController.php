@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Transaction;
 use App\TransactionDetail;
 use App\User;
 use Illuminate\Http\Request;
@@ -11,23 +12,9 @@ class DashboardTransactionController extends Controller
 {
     public function index()
     {
-        $transactions = TransactionDetail::with(['transaction.user', 'product.galleries'])
-            ->whereHas('product', function ($product) {
-                $product->where('users_id', Auth::user()->id);
-            });
+        $transactions = User::find(Auth::user()->id)->transactions;
 
-        $revenue = $transactions->get()->reduce(function ($carry, $item) {
-            return $carry + $item->price;
-        });
-
-        $customer = User::count();
-
-        return view('pages.dashboard-transactions', [
-            'transaction_count' => $transactions->count(),
-            'transaction_data' => $transactions->get(),
-            'revenue' => $revenue,
-            'customer' => $customer,
-        ]);
+        return view('pages.dashboard-transactions', compact('transactions'));
     }
 
     // public function index()
@@ -35,8 +22,22 @@ class DashboardTransactionController extends Controller
     //     return view('pages.dashboard-transactions');
     // }
 
-    public function details()
+    public function details($id)
     {
-        return view('pages.dashboard-transactions-details');
+        $transaction = Transaction::find($id);
+
+        return view('pages.dashboard-transactions-details', compact('transaction'));
     }
+
+    public function update(Request $request)
+    {
+        $transaction = Transaction::find($request->transaction_id);
+
+        $transaction->payment_image = $request->file('photos')->store('assets/payment', 'public');
+        $transaction->transaction_status = 'CONFIRMED';
+        $transaction->save();
+
+        return redirect()->route('dashboard-transaction');
+    }
+
 }
