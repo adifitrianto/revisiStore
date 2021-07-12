@@ -36,10 +36,13 @@ class ProductGalleryController extends Controller
                                         Aksi
                                 </button>
                                 <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="' . route('product-gallery.create', $item->id) . '">
+                                        Sunting
+                                    </a>
                                     <form action="' . route('product-gallery.destroy', $item->id) . '" method="POST">
                                         ' . method_field('delete') . csrf_field() . '
                                         <button type="submit" class="dropdown-item text-danger">
-                                            hapus
+                                            Hapus
                                         </button>
                                     </form>
                                 </div>
@@ -48,7 +51,11 @@ class ProductGalleryController extends Controller
                     ';
                 })
                 ->editColumn('photos', function ($item) {
-                    return $item->photos ? '<img src="' . Storage::url($item->photos) . '" style="max-height: 80px;" />' : '';
+                    if (is_object($item)) {
+                        return $item->photos ? '<img src="' . Storage::url($item->photos) . '" style="max-height: 80px;" />' : '';
+                    }
+
+                    return "";
                 })
                 ->rawColumns(['action', 'photos'])
                 ->make();

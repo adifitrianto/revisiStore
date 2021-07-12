@@ -30,7 +30,9 @@ class TransactionController extends Controller
         // ]);
 
 
-        $transactions = Transaction::all();
+        $transactions = Transaction::query()->orderBy("created_at", "DESC")->get();
+        
+        
         return view('pages.admin.transaction.index', compact('transactions'));
     }
 

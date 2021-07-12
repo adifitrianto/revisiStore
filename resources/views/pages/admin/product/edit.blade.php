@@ -41,7 +41,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Pemilik Product</label>
+                                                <label>Pemilik Produk</label>
                                                 <select name="users_id" class="form-control">
                                                     <option value="{{ $item->users_id }}" selected>
                                                         {{ $item->user['name'] }}</option>

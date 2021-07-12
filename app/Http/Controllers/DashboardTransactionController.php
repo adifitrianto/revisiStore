@@ -39,5 +39,4 @@ class DashboardTransactionController extends Controller
 
         return redirect()->route('dashboard-transaction');
     }
-
 }

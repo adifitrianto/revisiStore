@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <<div class="section-content section-dashboard-home" data-aos="fade-up">
+    <div class="section-content section-dashboard-home" data-aos="fade-up">
         <div class="container-fluid">
             <div class="dashboard-heading">
                 <h2 class="dashboard-title">#{{ $transaction->code }}</h2>
@@ -57,7 +57,6 @@
 
                                 @foreach ($transaction->details as $detail)
                                     <div class="row">
-
                                         <div class="col-12 col-md-4">
                                             <img src="{{ Storage::url($detail->product['galleries']->first()->photos ?? '') }}"
                                                 class="w-100 mb-3" alt="" />
@@ -123,6 +122,7 @@
             </div>
         </div>
         </div>
+        
 
         @if ($transaction->transaction_status === 'PENDING')
             <section>

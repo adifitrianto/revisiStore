@@ -60,7 +60,6 @@ Route::prefix('admin')
         Route::resource('category', 'CategoryController');
         Route::resource('user', 'UserController');
         Route::resource('product', 'ProductController');
-        Route::resource('product', 'ProductController');
         Route::get('product/gallery/{id}', 'ProductController@gallery')->name('product.gallery');
         Route::get('product/gallery/create/{id}', 'ProductController@galleryCreate')->name('product.gallery.create');
         Route::resource('product-gallery', 'ProductGalleryController');

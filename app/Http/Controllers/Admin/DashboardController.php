@@ -16,17 +16,18 @@ class DashboardController extends Controller
     {
         $customer = User::count();
         $revenue = Transaction::sum('total_price');
-        $transaction = Transaction::count();
+        $transactionCount = Transaction::count();
 
         $transactions = TransactionDetail::with(['transaction.user', 'product.galleries'])
-            ->whereHas('product', function ($product) {
-                $product->where('users_id', Auth::user()->id);
-            });
+            ->has('transaction')
+            ->orderBy("created_at", "DESC");
+
+        
 
         return view('pages.admin.dashboard', [
             'customer' => $customer,
             'revenue' => $revenue,
-            'transaction' => $transaction,
+            'transaction' => $transactionCount,
             'transaction_data' => $transactions->get()
         ]);
     }

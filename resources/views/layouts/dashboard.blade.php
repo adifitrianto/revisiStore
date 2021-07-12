@@ -24,8 +24,6 @@
                     <img src="/images/dashboard-store-logo.svg" alt="" class="my-4" />
                 </div>
                 <div class="list-group list-group-flush">
-                    
-                    <a href="/dashboard-account.html" class="list-group-item list-group-item-action">My Account</a>
                 </div>
             </div>
             <!-- /#sidebar-wrapper -->
@@ -50,11 +48,9 @@
                                     aria-haspopup="true" aria-expanded="false">
                                     <img src="/images/icon-user.png" alt=""
                                         class="rounded-circle mr-2 profile-picture" />
-                                    Hi, 
+                                    Hi, {{ Auth::user()->name }}
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                   
-                                    
                                     <a class="dropdown-item" href="/">Back</a>
                                 </div>
                             </li>
@@ -64,7 +60,7 @@
                         <ul class="navbar-nav d-block d-lg-none mt-3">
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
-                                    Hi, 
+                                    Hi, {{ Auth::user()->name }}
                                 </a>
                             </li>
                             <li class="nav-item">

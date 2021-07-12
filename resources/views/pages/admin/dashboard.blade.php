@@ -37,7 +37,7 @@
                           Revenue
                         </div>
                         <div class="dashboard-card-subtitle">
-                          Rp.{{ $revenue }}
+                          Rp.{{ number_format ($revenue) }}
                         </div>
                       </div>
                     </div>
@@ -60,29 +60,26 @@
                     <h5 class="mb-3">Recent Transactions</h5>
                     @foreach ($transaction_data as $transaction)
                     <a class="card card-list d-block"
-                      href="{{ route('dashboard-transaction-details', $transaction->id) }}">
+                      href="{{ route('transaction.edit', $transaction->transaction_id) }}">
                       <div class="card-body">
                         <div class="row">
                           <div class="col-md-1">
                             <img
-                              src="{{ Storage::url($transaction->product->galleries->first()->photos ?? '') }}"
+                              src="{{ Storage::url($transaction->product->image ?? '') }}"
                               class="w-75"
                             />
                           </div>
-                          <div class="col-md-4">
-                            {{ $transaction->product->name ?? '' }}
+                          <div class="col-md-2">
+                            {{ $transaction->transaction->code ?? '' }}
                           </div>
                           <div class="col-md-3">
-                            {{ $transaction->transaction->user->name ?? '' }}
+                            {{ $transaction->transaction->user->name ?? 'tidak ada nama' }}
+                          </div>
+                          <div class="col-md-3">
+                            Rp.{{ $transaction->product->price }}
                           </div>
                           <div class="col-md-3">
                             {{ $transaction->created_at ?? '' }}
-                          </div>
-                          <div class="col-md-1 d-none d-md-block">
-                            <img
-                              src="/images/dashboard-arrow-right.svg"
-                              alt=""
-                            />
                           </div>
                         </div>
                       </div>

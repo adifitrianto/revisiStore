@@ -43,15 +43,19 @@ class ConfirmedController extends Controller
     public function update($id, Request $request)
     {
         $transaction = Transaction::find($id);
-        if ($request->action == 'valid') {
+
+        $action = request()->post("action");
+
+        if ($action == 'valid') {
             $transaction->transaction_status = 'PAID';
-        } else if ($_POST['action'] == 'Delete') {
+        } else if ($action == 'Delete') {
             $transaction->transaction_status = 'PENDING';
         } else {
-            abort(500);
+            $transaction->transaction_status = 'PENDING';
         }
+
         $transaction->save();
 
-        return view('pages.admin.confirmed.index');
+        return redirect()->to("admin/confirmed");
     }
 }

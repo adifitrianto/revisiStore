@@ -19,11 +19,11 @@ class Product extends Model
 
     public function galleries()
     {
-        return $this->hasMany(ProductGallery::class, 'products_id', 'id');
+        return $this->hasMany(ProductGallery::class, 'products_id');
     }
 
     public function user()
-    {
+    { 
         return $this->hasOne(User::class, 'id', 'users_id');
     }
 
@@ -34,11 +34,16 @@ class Product extends Model
 
     function getQuantityAttribute()
     {
-        return sprintf('%s / %s', $this->stock_available, $this->stock_total);
+        return "{$this->stock_available} / {$this->stock_total}";
+        //return sprintf('%s / %s', $this->stock_available, $this->stock_total);
     }
 
     function getImageAttribute()
     {
-        return $this->galleries()->first()->photos;
+        if($this->galleries()->get()->isNotEmpty()) {
+            return $this->galleries()->first()->photos;
+        } 
+        
+        return null;
     }
 }

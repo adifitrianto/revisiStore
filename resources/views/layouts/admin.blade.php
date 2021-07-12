@@ -29,11 +29,11 @@
                     <a href="{{ route('product.index') }}" class="list-group-item list-group-item-action {{ (request()->is('admin/product')) ? 'active' : '' }}">Products</a>
                     <a href="{{ route('product-gallery.index') }}" class="list-group-item list-group-item-action {{ (request()->is('admin/product-gallery*')) ? 'active' : '' }}">Gallery</a>
                     <a href="{{ route('category.index') }}" class="list-group-item list-group-item-action {{ (request()->is('admin/category*')) ? 'active' : '' }}">Categories</a>
-                    <a href="{{ route('transaction.index') }}" class="list-group-item list-group-item-action {{ (request()->is('admin/transaction*')) ? 'active' : '' }}">Transactions</a>
+                    <!-- <a href=" route('transaction.index')  }}" class="list-group-item list-group-item-action {{ (request()->is('admin/transaction*')) ? 'active' : '' }}">Transactions</a> -->
                      <a href="{{ route('warehouse.index') }}" class="list-group-item list-group-item-action {{ (request()->is('admin/warehouse*')) ? 'active' : '' }}">Warehouse</a>
                      <a href="{{ route('confirmed.index') }}" class="list-group-item list-group-item-action {{ (request()->is('admin/confirmed*')) ? 'active' : '' }}">Payment Confirmed</a>
                     
-                    <a href="#" class="list-group-item list-group-item-action">Sign Out</a>
+                    <a href="/" class="list-group-item list-group-item-action">Sign Out</a>
                     
                 </div>
             </div>
