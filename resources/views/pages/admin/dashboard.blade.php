@@ -76,7 +76,7 @@
                             {{ $transaction->transaction->user->name ?? 'tidak ada nama' }}
                           </div>
                           <div class="col-md-3">
-                            Rp.{{ $transaction->product->price }}
+                            Rp.{{ $transaction->product->price ?? '' }}
                           </div>
                           <div class="col-md-3">
                             {{ $transaction->created_at ?? '' }}
